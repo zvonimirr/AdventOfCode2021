@@ -1,59 +1,35 @@
 defmodule AdventOfCode2021.Day2 do
   def solve(input) do
-    parsed_input =
-      input
-      |> Enum.map(&String.split(&1, " "))
-      |> Enum.map(fn [command, value] ->
-        [
-          command
-        ] ++
-          [
-            Integer.parse(value)
-            |> Kernel.elem(0)
-          ]
-      end)
+    Enum.reduce(input, {0, 0}, fn full_command,
+                                  {
+                                    horizontal,
+                                    depth
+                                  } ->
+      [command, number] = String.split(full_command, " ")
+      value = number |> Integer.parse() |> Kernel.elem(0)
 
-    horizontal =
-      parsed_input
-      |> Enum.filter(fn [command, _value] -> command == "forward" end)
-      |> Enum.map(&List.last/1)
-      |> Enum.sum()
-
-    depth =
-      parsed_input
-      |> Enum.filter(fn [command, _value] -> command == "up" or command == "down" end)
-      |> Enum.map(fn [command, value] ->
-        if command == "up", do: -value, else: value
-      end)
-      |> Enum.sum()
-
-    horizontal * depth
+      case command do
+        "forward" -> {horizontal + value, depth}
+        "up" -> {horizontal, depth - value}
+        "down" -> {horizontal, depth + value}
+      end
+    end)
+    |> Tuple.product()
   end
 
   def solve_part2(input) do
-    parsed_input =
-      input
-      |> Enum.map(&String.split(&1, " "))
-      |> Enum.map(fn [command, value] ->
-        [
-          command
-        ] ++
-          [
-            Integer.parse(value)
-            |> Kernel.elem(0)
-          ]
-      end)
-
     # Horizontal, Depth, Aim
-    {horizontal, depth, _aim} =
-      Enum.reduce(parsed_input, {0, 0, 0}, fn [command, value], {horizontal, depth, aim} ->
-        case command do
-          "down" -> {horizontal, depth, aim + value}
-          "up" -> {horizontal, depth, aim - value}
-          "forward" -> {horizontal + value, depth + value * aim, aim}
-        end
-      end)
+    Enum.reduce(input, {0, 0, 0}, fn full_command, {horizontal, depth, aim} ->
+      [command, number] = String.split(full_command, " ")
+      value = number |> Integer.parse() |> Kernel.elem(0)
 
-    horizontal * depth
+      case command do
+        "down" -> {horizontal, depth, aim + value}
+        "up" -> {horizontal, depth, aim - value}
+        "forward" -> {horizontal + value, depth + value * aim, aim}
+      end
+    end)
+    |> Tuple.delete_at(2)
+    |> Tuple.product()
   end
 end
