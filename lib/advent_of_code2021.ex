@@ -24,4 +24,13 @@ defmodule AdventOfCode2021 do
 
     AdventOfCode2021.Day1.solve_part2(input)
   end
+
+  def day2 do
+    input =
+      File.read!("inputs/day2.txt")
+      |> String.split("\n")
+      |> List.delete_at(-1)
+
+    AdventOfCode2021.Day2.solve(input)
+  end
 end
