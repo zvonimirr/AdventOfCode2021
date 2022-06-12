@@ -6,7 +6,7 @@ defmodule AdventOfCode2021.Day2 do
                                     depth
                                   } ->
       [command, number] = String.split(full_command, " ")
-      value = number |> Integer.parse() |> Kernel.elem(0)
+      value = number |> String.to_integer()
 
       case command do
         "forward" -> {horizontal + value, depth}
@@ -21,7 +21,7 @@ defmodule AdventOfCode2021.Day2 do
     # Horizontal, Depth, Aim
     Enum.reduce(input, {0, 0, 0}, fn full_command, {horizontal, depth, aim} ->
       [command, number] = String.split(full_command, " ")
-      value = number |> Integer.parse() |> Kernel.elem(0)
+      value = number |> String.to_integer()
 
       case command do
         "down" -> {horizontal, depth, aim + value}

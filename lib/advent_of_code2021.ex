@@ -16,10 +16,7 @@ defmodule AdventOfCode2021 do
     input =
       File.read!("inputs/day1.txt")
       |> String.split("\n", trim: true)
-      |> Enum.map(fn number ->
-        Integer.parse(number)
-        |> Kernel.elem(0)
-      end)
+      |> Enum.map(&String.to_integer/1)
 
     AdventOfCode2021.Day1.solve_part2(input)
   end

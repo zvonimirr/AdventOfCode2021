@@ -10,8 +10,7 @@ defmodule AdventOfCode2021.Day3 do
         if Kernel.length(zeros) > Kernel.length(ones), do: 0, else: 1
       end
       |> Enum.join("")
-      |> Integer.parse(2)
-      |> Kernel.elem(0)
+      |> String.to_integer(2)
 
     epsilon_rate =
       for pos <- 1..len do
@@ -21,8 +20,7 @@ defmodule AdventOfCode2021.Day3 do
         if Kernel.length(zeros) > Kernel.length(ones), do: 1, else: 0
       end
       |> Enum.join("")
-      |> Integer.parse(2)
-      |> Kernel.elem(0)
+      |> String.to_integer(2)
 
     gamma_rate * epsilon_rate
   end
@@ -44,8 +42,7 @@ defmodule AdventOfCode2021.Day3 do
           else: {:cont, {filtered_list, index + 1}}
       end)
       |> List.first()
-      |> Integer.parse(2)
-      |> Kernel.elem(0)
+      |> String.to_integer(2)
 
     co2_scrubber_rating =
       input
@@ -62,8 +59,7 @@ defmodule AdventOfCode2021.Day3 do
           else: {:cont, {filtered_list, index + 1}}
       end)
       |> List.first()
-      |> Integer.parse(2)
-      |> Kernel.elem(0)
+      |> String.to_integer(2)
 
     oxygen_generator_rating * co2_scrubber_rating
   end
