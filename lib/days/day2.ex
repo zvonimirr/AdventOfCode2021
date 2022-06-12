@@ -29,4 +29,31 @@ defmodule AdventOfCode2021.Day2 do
 
     horizontal * depth
   end
+
+  def solve_part2(input) do
+    parsed_input =
+      input
+      |> Enum.map(&String.split(&1, " "))
+      |> Enum.map(fn [command, value] ->
+        [
+          command
+        ] ++
+          [
+            Integer.parse(value)
+            |> Kernel.elem(0)
+          ]
+      end)
+
+    # Horizontal, Depth, Aim
+    {horizontal, depth, _aim} =
+      Enum.reduce(parsed_input, {0, 0, 0}, fn [command, value], {horizontal, depth, aim} ->
+        case command do
+          "down" -> {horizontal, depth, aim + value}
+          "up" -> {horizontal, depth, aim - value}
+          "forward" -> {horizontal + value, depth + value * aim, aim}
+        end
+      end)
+
+    horizontal * depth
+  end
 end
