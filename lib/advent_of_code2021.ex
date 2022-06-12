@@ -15,8 +15,7 @@ defmodule AdventOfCode2021 do
   def day1_part2 do
     input =
       File.read!("inputs/day1.txt")
-      |> String.split("\n")
-      |> List.delete_at(-1)
+      |> String.split("\n", trim: true)
       |> Enum.map(fn number ->
         Integer.parse(number)
         |> Kernel.elem(0)
@@ -28,8 +27,7 @@ defmodule AdventOfCode2021 do
   def day2 do
     input =
       File.read!("inputs/day2.txt")
-      |> String.split("\n")
-      |> List.delete_at(-1)
+      |> String.split("\n", trim: true)
 
     AdventOfCode2021.Day2.solve(input)
   end
@@ -37,8 +35,7 @@ defmodule AdventOfCode2021 do
   def day2_part2 do
     input =
       File.read!("inputs/day2.txt")
-      |> String.split("\n")
-      |> List.delete_at(-1)
+      |> String.split("\n", trim: true)
 
     AdventOfCode2021.Day2.solve_part2(input)
   end
@@ -46,8 +43,7 @@ defmodule AdventOfCode2021 do
   def day3 do
     input =
       File.read!("inputs/day3.txt")
-      |> String.split("\n")
-      |> List.delete_at(-1)
+      |> String.split("\n", trim: true)
 
     AdventOfCode2021.Day3.solve(input)
   end
@@ -55,8 +51,7 @@ defmodule AdventOfCode2021 do
   def day3_part2 do
     input =
       File.read!("inputs/day3.txt")
-      |> String.split("\n")
-      |> List.delete_at(-1)
+      |> String.split("\n", trim: true)
 
     AdventOfCode2021.Day3.solve_part2(input)
   end
