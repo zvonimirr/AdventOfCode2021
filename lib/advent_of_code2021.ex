@@ -3,10 +3,10 @@ defmodule AdventOfCode2021 do
     input =
       File.read!("inputs/day1.txt")
       |> String.split("\n")
-      |> Enum.filter(fn x -> x != "" end)
-      |> Enum.map(fn x ->
-        {res, ""} = Integer.parse(x)
-        res
+      |> List.delete_at(-1)
+      |> Enum.map(fn number ->
+        Integer.parse(number)
+        |> Kernel.elem(0)
       end)
 
     AdventOfCode2021.Day1.solve(input)
